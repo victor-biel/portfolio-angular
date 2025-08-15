@@ -1,0 +1,23 @@
+<form (ngSubmit)="onSubmit()" #contactForm="ngForm" class="max-w-4xl mx-auto p-6 bg-transparent">
+  <h2 class="text-2xl text-white font-bold mb-4 font-poppins">Me mande um e-mail</h2>
+
+  <div class="mb-4">
+    <label class="block text-gray-300 font-roboto">Nome</label>
+    <input type="text" name="name" [(ngModel)]="formData.name" placeholder="Digite seu nome" required class="w-full p-2 bg-transparent text-blue-200 font-poppins border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+  </div>
+
+  <div class="mb-4">
+    <label class="block text-gray-300 font-roboto">E-mail</label>
+    <input type="email" name="email" [(ngModel)]="formData.email" placeholder="Digite seu email" required class="w-full p-2 bg-transparent text-blue-200 font-poppins border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+  </div>
+
+  <div class="mb-4">
+    <label class="block text-gray-300 font-roboto">Mensagem</label>
+    <textarea name="message" [(ngModel)]="formData.message" placeholder="Digite sua mensagem" required class="w-full p-2 bg-transparent text-blue-200 font-poppins border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+  </div>
+  <div class="justify-center flex">
+    <button type="submit" class="hover:bg-blue-500 w-1/2 bg-transparent border-2 text-white font-bold py-2 rounded-xl hover:bg-blue-600 transition-colors duration-300">
+      Enviar
+    </button>
+  </div>
+</form>

@@ -1,0 +1,412 @@
+/* Efeitos de fundo interativos */
+.interactive-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.interactive-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(59, 130, 246, 0.2) 0%,
+    rgba(139, 92, 246, 0.15) 25%,
+    rgba(236, 72, 153, 0.1) 50%,
+    transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.interactive-bg:hover::before {
+  opacity: 1;
+}
+
+/* Luz que segue o mouse */
+.interactive-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle 200px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(59, 130, 246, 0.05) 30%,
+    transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.interactive-bg:hover::after {
+  opacity: 1;
+}
+
+/* Animação de partículas flutuantes */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 1;
+  }
+}
+
+.floating-particle {
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-particle:nth-child(odd) {
+  animation-delay: -2s;
+  animation-duration: 8s;
+}
+
+.floating-particle:nth-child(even) {
+  animation-delay: -4s;
+  animation-duration: 10s;
+}
+
+/* Efeito de ondas no fundo */
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.wave-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1000px;
+  height: 1000px;
+  background: conic-gradient(from 0deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  animation: wave 20s linear infinite;
+  transform-origin: center;
+  opacity: 0.3;
+}
+
+/* Efeito de digitação para o nome - FUNCIONANDO */
+.typewriter {
+  overflow: hidden;
+  border-right: 3px solid white;
+  white-space: nowrap;
+  width: 0;
+  display: inline-block;
+  font-family: inherit;
+  animation: typewriter 4s steps(11, end) forwards, blink-caret 0.75s step-end infinite;
+}
+
+/* Efeitos da imagem de perfil */
+.profile-image-container {
+  perspective: 1000px;
+}
+
+.profile-image-container:hover {
+  transform: rotateY(5deg) rotateX(5deg);
+}
+
+.profile-image-container::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg,
+    #3b82f6, #8b5cf6, #ec4899, #06d6a0, #3b82f6);
+  background-size: 400% 400%;
+  border-radius: 1rem;
+  z-index: -1;
+  animation: gradient-border 3s ease infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.profile-image-container:hover::before {
+  opacity: 1;
+}
+
+@keyframes gradient-border {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Efeito de reflexo na imagem */
+.profile-image-container img {
+  position: relative;
+}
+
+.profile-image-container img::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+
+.profile-image-container:hover img::after {
+  transform: translateX(100%);
+}
+
+@keyframes typewriter {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 11ch;
+  }
+}
+
+/* Efeito de digitação com reescrita parcial */
+.typing-profession {
+  overflow: hidden;
+  border-right: 2px solid rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+  display: inline-block;
+  animation: blink-caret 0.75s step-end infinite 4.5s;
+}
+
+.typing-profession::before {
+  content: "Desenvolvedor Full Stack";
+  animation: rewrite-text 16s infinite 4.5s;
+  display: inline-block;
+  width: 0;
+  overflow: hidden;
+}
+
+/* Animação de reescrita com efeito de apagar e escrever */
+@keyframes rewrite-text {
+  /* Começa com "Desenvolvedor Full Stack" */
+  0% { 
+    content: "Desenvolvedor Full Stack";
+    width: 23ch;
+  }
+  10% { 
+    content: "Desenvolvedor Full Stack";
+    width: 23ch;
+  }
+  
+  /* Apaga "Full Stack" letra por letra */
+  12% { 
+    content: "Desenvolvedor Full Stac";
+    width: 22ch;
+  }
+  14% { 
+    content: "Desenvolvedor Full Sta";
+    width: 21ch;
+  }
+  16% { 
+    content: "Desenvolvedor Full St";
+    width: 20ch;
+  }
+  18% { 
+    content: "Desenvolvedor Full S";
+    width: 19ch;
+  }
+  20% { 
+    content: "Desenvolvedor Full ";
+    width: 18ch;
+  }
+  22% { 
+    content: "Desenvolvedor ";
+    width: 14ch;
+  }
+  
+  /* Escreve "Frontend" */
+  24% { 
+    content: "Desenvolvedor F";
+    width: 15ch;
+  }
+  26% { 
+    content: "Desenvolvedor Fr";
+    width: 16ch;
+  }
+  28% { 
+    content: "Desenvolvedor Fro";
+    width: 17ch;
+  }
+  30% { 
+    content: "Desenvolvedor Fron";
+    width: 18ch;
+  }
+  32% { 
+    content: "Desenvolvedor Front";
+    width: 19ch;
+  }
+  34% { 
+    content: "Desenvolvedor Fronte";
+    width: 20ch;
+  }
+  36% { 
+    content: "Desenvolvedor Frontend";
+    width: 21ch;
+  }
+  
+  /* Fica com "Frontend" por um tempo */
+  46% { 
+    content: "Desenvolvedor Frontend";
+    width: 21ch;
+  }
+  
+  /* Apaga "Frontend" */
+  48% { 
+    content: "Desenvolvedor Fronten";
+    width: 20ch;
+  }
+  50% { 
+    content: "Desenvolvedor Front";
+    width: 19ch;
+  }
+  52% { 
+    content: "Desenvolvedor ";
+    width: 14ch;
+  }
+  
+  /* Escreve "Backend" */
+  54% { 
+    content: "Desenvolvedor B";
+    width: 15ch;
+  }
+  56% { 
+    content: "Desenvolvedor Ba";
+    width: 16ch;
+  }
+  58% { 
+    content: "Desenvolvedor Bac";
+    width: 17ch;
+  }
+  60% { 
+    content: "Desenvolvedor Back";
+    width: 18ch;
+  }
+  62% { 
+    content: "Desenvolvedor Backe";
+    width: 19ch;
+  }
+  64% { 
+    content: "Desenvolvedor Backend";
+    width: 20ch;
+  }
+  
+  /* Fica com "Backend" */
+  70% { 
+    content: "Desenvolvedor Backend";
+    width: 20ch;
+  }
+  
+  /* Apaga tudo e escreve "Criador de Experiências" */
+  72% { 
+    content: "Desenvolvedor";
+    width: 13ch;
+  }
+  74% { 
+    content: "Desenvol";
+    width: 8ch;
+  }
+  76% { 
+    content: "C";
+    width: 1ch;
+  }
+  78% { 
+    content: "Cr";
+    width: 2ch;
+  }
+  80% { 
+    content: "Cri";
+    width: 3ch;
+  }
+  82% { 
+    content: "Cria";
+    width: 4ch;
+  }
+  84% { 
+    content: "Criado";
+    width: 6ch;
+  }
+  86% { 
+    content: "Criador ";
+    width: 8ch;
+  }
+  88% { 
+    content: "Criador de ";
+    width: 11ch;
+  }
+  90% { 
+    content: "Criador de Exp";
+    width: 14ch;
+  }
+  92% { 
+    content: "Criador de Experiên";
+    width: 19ch;
+  }
+  94% { 
+    content: "Criador de Experiências";
+    width: 22ch;
+  }
+  
+  /* Fica com "Criador de Experiências" */
+  98% { 
+    content: "Criador de Experiências";
+    width: 22ch;
+  }
+  
+  /* Volta para o início - apaga tudo e escreve "Desenvolvedor Full Stack" */
+  99% { 
+    content: "Desenvolvedor Full Stack";
+    width: 23ch;
+  }
+  100% { 
+    content: "Desenvolvedor Full Stack";
+    width: 23ch;
+  }
+}
+
+/* Animação do cursor piscando */
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: white; }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .typing-effect::before {
+    animation: typing-name 3s steps(11, end) forwards, blink-caret 0.75s step-end infinite;
+  }
+
+  .typing-text {
+    animation: typing-text 3s steps(25, end) 0.5s both, blink-caret 0.75s step-end infinite 0.5s;
+  }
+
+  .typing-profession {
+    animation: type-profession-mobile 12s steps(30, end) infinite 3.5s, blink-caret 0.75s step-end infinite 3.5s;
+  }
+
+  @keyframes type-profession-mobile {
+    0%, 25% { width: 20ch; }
+    30%, 55% { width: 12ch; }
+    60%, 85% { width: 18ch; }
+    90%, 100% { width: 20ch; }
+  }
+}
