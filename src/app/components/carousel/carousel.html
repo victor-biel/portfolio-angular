@@ -1,18 +1,20 @@
 <div class="carousel-container relative overflow-hidden w-full">
   <div class="carousel-track flex transition-transform duration-500 ease-in-out"
     [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
-    <div class="carousel-item w-full flex-shrink-0"  *ngFor="let img of images">
+    <div class="carousel-item w-full flex-shrink-0"  *ngFor="let proj of projects">
       <div class="bg-blue-900 rounded-xl shadow-2xl p-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div>
-          <a [href]="img.url" target="_blank" rel="noopener noreferrer"
+          <a [href]="proj.url" target="_blank" rel="noopener noreferrer"
             class="block hover:opacity-80 transition-opacity duration-300">
-            <img [src]="img.src" class="w-full h-64 object-cover rounded-xl">
+            <img [src]="proj.image" class="object-contain w-full h-64 rounded-xl">
           </a>
           
         </div>
         <div>
-          <h2 class="text-xl text-white font-bold mt-3 font-poppins text-center">{{img.title}}</h2>
-          <p class="text-l text-white mt-3 font-roboto text-center">{{img.description}}</p>
+          <h2 class="text-xl text-white font-bold mt-3 font-poppins text-center">{{proj.title}}</h2>
+          <p class="text-l text-white mt-3 font-roboto text-center">{{proj.description}}</p><br>
+          <hr>
+          <p class="text-l text-white mt-3 font-poppins text-center"><strong>Tecnologias:</strong> {{proj.technologies}}</p>
         </div>
       </div>
     </div>

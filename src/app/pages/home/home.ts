@@ -1,17 +1,35 @@
 import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
-import { About } from "../about/about";
+import { Router } from '@angular/router';
 import {Projects } from "../projects/projects"
 import { Contact } from "../contact/contact";
+import { Carousel } from '../../components/carousel/carousel';
+import { ContactForm } from '../../components/contact-form/contact-form';
+import { Background } from '../../components/background/background';
 
 @Component({
   selector: 'app-home',
-  imports: [About, Projects, Contact],
+  imports: [Carousel, Projects, Contact, ContactForm, Background],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
 export class Home implements OnInit, OnDestroy {
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef, private router: Router) {}
+
+  navigateToProjects() {
+    console.log('Navegando para projects...');
+    this.router.navigate(['/projects']);
+  }
+
+  showOrHiddenContactForm() {
+    const form = document.getElementById('contact-form');
+    if (form?.classList.contains('hidden')) {
+      form?.classList.remove('hidden');
+    } else {
+      form?.classList.add('hidden');
+    }
+
+  }
 
   ngOnInit() {
     this.initMouseEffects();

@@ -1,16 +1,55 @@
-<section class="min-h-screen flex items-center justify-center">
-  <div class="w-full">
-    <h2 class="text-4xl font-bold text-white mb-12 text-center font-poppins">
-      Meus Projetos
-    </h2>
-    <app-carousel></app-carousel>
-    <div class="text-center mt-12">
-      <a href="https://github.com/victor-biel" target="_blank">
-        <button
-          class="bg-white text-blue-500 font-bold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 hover:bg-gray-50 font-poppins text-lg">
-          Explore Mais Projetos
-        </button>
-      </a>
-    </div>
+<app-background>
+
+  <div class="max-w-6xl mx-auto relative mb-4 mt-12 z-10 flex items-center space-x-2">
+    <a routerLink="/home"
+      class="text-white font-roboto transform hover:scale-105 transition-transform duration-300 cursor-pointer hover:text-blue-500 hover:font-bold">Início
+    </a>
+    <span class="text-gray-400 font-roboto">/ Projetos</span>
   </div>
-</section>
+  <div class="max-w-6xl mx-auto relative z-10">
+    <section>
+      <h1 class="font-poppins text-6xl text-white">Meus Projetos</h1>
+
+      <div class="p-4 grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-fr">
+
+        <div *ngFor="let project of projects"
+          class="rounded-lg overflow-hidden shadow-lg shadow-indigo-500/50 flex flex-col h-full hover:scale-95 transition-transform duration-300 hover:shadow-inner"
+          [ngClass]="[project.colSpan === 1 ? 'col-span-1 bg-blue-700' : 'md:col-span-2 bg-blue-900', project.rowSpan === 1 ? 'row-span-1' : 'md:row-span-2']">
+          <img [src]="project.image" alt="{{ project.title }}" class="w-full object-contain"
+            [ngClass]="{ 'h-48': project.rowSpan === 1, 'h-96': project.rowSpan === 2 }">
+          <div class="p-4 flex flex-col flex-grow">
+            <h2 class="font-bold text-xl text-white font-poppins">{{ project.title }}</h2>
+            <p class="text-soft-mist font-roboto mt-2">{{ project.description }}</p>
+          </div>
+          <div class="flex justify-end m-4">
+            <button (click)="openModal(project)" class="text-cyan-500 hover:underline font-poppins">Ver
+              Detalhes</button>
+          </div>
+        </div>
+
+        <div *ngIf="selectedProject">
+          <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg max-w-4xl w-full max-h-[90vh]">
+              <img [src]="selectedProject.image" alt="{{ selectedProject.title }}" class="w-full h-48 object-contain">
+              <div class="p-6 flex flex-col flex-grow overflow-y-auto">
+                <h2 class="font-bold text-xl text-white">{{ selectedProject.title }}</h2>
+                <p class="text-gray-400 flex-grow">{{ selectedProject.details }}</p>
+                <p class="text-gray-400 mt-2"><strong>Tecnologias:</strong> {{ selectedProject.technologies }}</p>
+                <p class="text-gray-400 mt-2"><strong>Link:</strong> <a href="{{ selectedProject.url }}"
+                    class="text-blue-500 hover:underline">{{ selectedProject.url }}</a></p>
+                <div class="flex justify-end mt-4">
+                  <button (click)="closeModal()" class="text-blue-500 hover:underline">Fechar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+  </div>
+
+
+
+</app-background>
