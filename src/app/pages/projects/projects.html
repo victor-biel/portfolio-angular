@@ -15,7 +15,7 @@
         <div *ngFor="let project of projects"
           class="rounded-lg overflow-hidden shadow-lg shadow-indigo-500/50 flex flex-col h-full hover:scale-95 transition-transform duration-300 hover:shadow-inner"
           [ngClass]="[project.colSpan === 1 ? 'col-span-1 bg-blue-700' : 'md:col-span-2 bg-blue-900', project.rowSpan === 1 ? 'row-span-1' : 'md:row-span-2']">
-          <img [src]="project.image" alt="{{ project.title }}" class="w-full object-contain"
+          <img [src]="project.image[0]" alt="{{ project.title }}" class="w-full object-contain"
             [ngClass]="{ 'h-48': project.rowSpan === 1, 'h-96': project.rowSpan === 2 }">
           <div class="p-4 flex flex-col flex-grow">
             <h2 class="font-bold text-xl text-white font-poppins">{{ project.title }}</h2>
@@ -29,14 +29,33 @@
 
         <div *ngIf="selectedProject">
           <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg max-w-4xl w-full max-h-[90vh]">
-              <img [src]="selectedProject.image" alt="{{ selectedProject.title }}" class="w-full h-48 object-contain">
+            <div class="bg-green-dark1 rounded-lg overflow-hidden shadow-lg max-w-4xl w-full max-h-[90vh]">
+              <div class="relative">
+                <img [src]="selectedProject.image[selectedImageIndex]" alt="{{ selectedProject.title }} "
+                  class="w-full h-48 object-contain cursor-zoom-in transition-transform duration-300" (click)="isZoomed = !isZoomed" [ngClass]="{'scale-150': isZoomed}">
+                <button class="text-2xl font-bold text-white absolute left-0 top-1/2 -translate-y-1/2 p-2"
+                  (click)="prevImage()">❮</button>
+                <button class="text-2xl font-bold text-white absolute right-0 top-1/2 -translate-y-1/2 p-2"
+                  (click)="nextImage()">❯</button>
+              </div>
               <div class="p-6 flex flex-col flex-grow overflow-y-auto">
                 <h2 class="font-bold text-xl text-white">{{ selectedProject.title }}</h2>
-                <p class="text-gray-400 flex-grow">{{ selectedProject.details }}</p>
-                <p class="text-gray-400 mt-2"><strong>Tecnologias:</strong> {{ selectedProject.technologies }}</p>
-                <p class="text-gray-400 mt-2"><strong>Link:</strong> <a href="{{ selectedProject.url }}"
-                    class="text-blue-500 hover:underline">{{ selectedProject.url }}</a></p>
+                <p class="text-gray-400 flex-grow" [innerHTML]="selectedProject.details">{{ selectedProject.details }}
+                </p>
+                <p class="text-gray-400 mt-2" [innerHTML]="selectedProject.technologies"><strong>Tecnologias:</strong>
+                  {{ selectedProject.technologies }}</p>
+                <p class="text-gray-400 mt-2" *ngIf="selectedProject.url && selectedProject.url.length > 0">
+                  <strong>Link's:</strong>
+                  <a [href]="selectedProject.url[0]" target="_blank" class="text-blue-500 hover:underline">
+                    GitHub
+                  </a>
+                  <span>e</span>
+                  <a *ngIf="selectedProject.url.length > 1" [href]="selectedProject.url[1]" target="_blank"
+                    class="text-blue-500 hover:underline">
+                    Demo
+                  </a>
+
+                </p>
                 <div class="flex justify-end mt-4">
                   <button (click)="closeModal()" class="text-blue-500 hover:underline">Fechar</button>
                 </div>

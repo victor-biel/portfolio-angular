@@ -19,12 +19,30 @@ export class Projects {
 
   selectedProject: Project | null = null;
 
+  selectedImageIndex = 0;
+
+  isZoomed = false;
+
+  nextImage() {
+    if(this.selectedProject?.image) {
+      this.selectedImageIndex = (this.selectedImageIndex + 1) % this.selectedProject.image.length;
+    }
+  }
+
+  prevImage() {
+    if(this.selectedProject?.image) {
+      this.selectedImageIndex = (this.selectedImageIndex - 1 + this.selectedProject.image.length) % this.selectedProject.image.length;
+    }
+  }
+
   openModal(project: Project) {
     this.selectedProject = project;
+    this.selectedImageIndex = 0;
   }
 
   closeModal() {
     this.selectedProject = null;
+    
   }
 
 }

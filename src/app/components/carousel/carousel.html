@@ -6,15 +6,15 @@
         <div>
           <a [href]="proj.url" target="_blank" rel="noopener noreferrer"
             class="block hover:opacity-80 transition-opacity duration-300">
-            <img [src]="proj.image" class="object-contain w-full h-64 rounded-xl">
+            <img [src]="proj.image[0]" class="object-contain w-full h-64 rounded-xl">
           </a>
           
         </div>
         <div>
           <h2 class="text-xl text-white font-bold mt-3 font-poppins text-center">{{proj.title}}</h2>
-          <p class="text-l text-white mt-3 font-roboto text-center">{{proj.description}}</p><br>
+          <p class="text-l text-white mt-3 font-roboto text-start">{{proj.description}}</p><br>
           <hr>
-          <p class="text-l text-white mt-3 font-poppins text-center"><strong>Tecnologias:</strong> {{proj.technologies}}</p>
+          <p class="text-l text-white mt-3 font-poppins text-start" [innerHTML]="proj.technologies"></p>
         </div>
       </div>
     </div>

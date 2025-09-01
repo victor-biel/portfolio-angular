@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ContactService } from './contact.service';
 
 @Component({
   selector: 'app-contact-form',
@@ -9,21 +10,23 @@ import { FormsModule } from '@angular/forms';
 })
 export class ContactForm {
 
-  formData = {
-    name: '',
-    email: '',
-    message: ''
-  };
+  formData = { name: '', email: '', message: '' };
+
+  constructor(private contactService: ContactService) {}
 
   onSubmit() {
-    console.log('Form submitted:', this.formData);
+    if (!this.formData.name || !this.formData.email || !this.formData.message) {
+      alert('Preencha todos os campos!');
+      return;
+    }
 
-    alert('Thank you for your message! We will get back to you soon.');
-    this.formData = {
-      name: '',
-      email: '',
-      message: ''
-    };
+    this.contactService.sendMessage(this.formData).subscribe({
+      next: () => {
+        alert('Mensagem enviada com sucesso!');
+        this.formData = { name: '', email: '', message: '' }; // reset
+      },
+      error: () => alert('Erro ao enviar mensagem.')
+    });
   }
 
 }
