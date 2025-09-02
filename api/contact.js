@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 
 
-const ALLOWED_ORIGINS = ['http://localhost:3000', 'https://portfolio-vicctor-biel.vercel.app/'];
+const ALLOWED_ORIGINS = ['http://localhost:4200', 'https://portfolio-vicctor-biel.vercel.app/'];
 
 
 
