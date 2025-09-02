@@ -42,5 +42,6 @@ testem.log
 Thumbs.db
 
 # Environment variables
-backend/.env
-backend/node_modules
+.env
+api/node_modules
+.vercel

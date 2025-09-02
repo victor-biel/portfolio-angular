@@ -5,9 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:prod": "ng build --configuration production --base-href https://victor-biel.github.io/portfolio-angular/",
-    "deploy": "npx gh-pages -d dist/portfolio-angular",
-    "build-and-deploy": "npm run build:prod && npm run deploy",
+    "build:prod": "ng build --configuration production --base-href /",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -30,6 +28,7 @@
     "@angular/platform-browser": "^20.1.0",
     "@angular/router": "^20.1.0",
     "rxjs": "~7.8.0",
+    "sweetalert2": "^11.22.5",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
