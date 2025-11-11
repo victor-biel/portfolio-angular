@@ -1,0 +1,242 @@
+.cd-header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.header-wrapper {
+  position: relative;
+  max-width: 1200px;
+  width: 100%;
+  height: 100px;
+  margin: 0 auto;
+  padding: 0 50px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+
+.nav {
+  position: fixed;
+  top: 100px;
+  right: 50px;
+  width: 300px;
+  z-index: 98;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0) rotate(180deg);
+  transform-origin: top right;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Quando ativo - Animação circular */
+.nav-active {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: scale(1) rotate(0deg) !important;
+}
+
+.nav__content {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(96, 165, 250, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  overflow: hidden;
+  position: relative;
+  right: 150px;
+  bottom: 30px;
+}
+
+/* Efeito de luz de fundo no card */
+/* .nav__content::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(96, 165, 250, 0.1), transparent);
+  animation: rotate 3s linear infinite;
+  z-index: -1;
+} */
+
+/* @keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+} */
+
+.nav__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav__list-item {
+  transform: translateX(30px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+
+/* Animação escalonada dos itens do menu */
+.nav-active .nav__list-item:nth-child(1) {
+  animation: slideInLeft 0.4s ease 0.1s forwards;
+}
+.nav-active .nav__list-item:nth-child(2) {
+  animation: slideInLeft 0.4s ease 0.2s forwards;
+}
+.nav-active .nav__list-item:nth-child(3) {
+  animation: slideInLeft 0.4s ease 0.3s forwards;
+}
+.nav-active .nav__list-item:nth-child(4) {
+  animation: slideInLeft 0.4s ease 0.4s forwards;
+}
+
+@keyframes slideInLeft {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.nav__list-item a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: block;
+  padding: 12px 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  border-radius: 8px;
+}
+
+.nav__list-item a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.3), transparent);
+  transition: left 0.4s ease;
+}
+
+.nav__list-item a:hover::before {
+  left: 100%;
+}
+
+.nav__list-item a:hover {
+  background: rgba(96, 165, 250, 0.1);
+  transform: translateX(5px);
+  color: #60a5fa;
+}
+
+.nav__list-item.active-nav a {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+}
+
+/* Estilos do hambúrguer simples */
+.nav-but-wrap {
+  position: relative;
+  z-index: 99;
+}
+
+.menu-icon {
+  width: 30px;
+  height: 24px;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease;
+}
+
+.menu-icon:hover {
+  transform: scale(1.1);
+}
+
+.menu-icon:hover .menu-icon__line-left {
+  transform: scale(1.1);
+  width: 70%;
+  margin-left: auto;
+
+}
+
+.menu-icon:hover .menu-icon__line-right {
+  transform: scale(1.1);
+  width: 70%;
+  margin-right: auto;
+}
+
+
+
+.menu-icon__line {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: white;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.menu-icon__line-left {
+  width: 70%;
+}
+
+.menu-icon__line-right {
+  width: 70%;
+  margin-left: auto;
+}
+
+/* Animação X quando menu está ativo */
+.nav-active .menu-icon__line-left {
+  transform: rotate(45deg) translate(6px, 6px);
+  width: 100%;
+
+}
+
+.menu-icon__line-left:hover {
+  width: 70%;
+  margin-left: auto;
+}
+
+.nav-active .menu-icon__line {
+  opacity: 0;
+}
+
+.nav-active .menu-icon__line-right {
+  transform: rotate(-45deg) translate(6px, -6px);
+  width: 100%;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .header-wrapper {
+    padding: 0 20px;
+  }
+
+  .nav {
+    width: 280px;
+    right: 20px;
+  }
+
+  .nav__content {
+    padding: 15px;
+  }
+
+  .nav__list-item a {
+    font-size: 1rem;
+    padding: 10px 15px;
+  }
+}

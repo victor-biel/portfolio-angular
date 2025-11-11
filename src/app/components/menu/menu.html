@@ -1,0 +1,31 @@
+<div class="cd-header">
+  <div class="header-wrapper">
+    <div class="nav-but-wrap">
+      <div class="menu-icon hover-target" (click)="toggleMenu()">
+        <span class="menu-icon__line menu-icon__line-left"></span>
+        <span class="menu-icon__line"></span>
+        <span class="menu-icon__line menu-icon__line-right"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="nav" [ngClass]="{ 'nav-active': navActive }">
+  <div class="nav__content">
+    <ul class="nav__list font-poppins cursor-pointer">
+      <li class="nav__list-item" routerLinkActive="active-nav">
+        <a routerLink="/home" class="hover-target" (click)="closeMenu()">Home</a>
+      </li>
+      <li class="nav__list-item">
+        <a class="hover-target" (click)="scrollToSection('about'); closeMenu()">Sobre</a>
+      </li>
+      <li class="nav__list-item" routerLinkActive="active-nav">
+        <a routerLink="/projects" class="hover-target" (click)="closeMenu()">Projetos</a>
+      </li>
+      <li class="nav__list-item">
+        <a class="hover-target" (click)="scrollToSection('contact'); closeMenu()">Contato</a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -5,10 +5,11 @@ import { Contact } from "../contact/contact";
 import { Carousel } from '../../components/carousel/carousel';
 import { ContactForm } from '../../components/contact-form/contact-form';
 import { Background } from '../../components/background/background';
+import { Menu } from '../../components/menu/menu';
 
 @Component({
   selector: 'app-home',
-  imports: [Carousel, Projects, Contact, ContactForm, Background],
+  imports: [Carousel, Projects, Contact, ContactForm, Background, Menu],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
